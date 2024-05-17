@@ -81,9 +81,8 @@ complete_matrix1 <- expand_grid(outcomes_specific_reordered = unique(fulldata$ou
   replace_na(list(n = 0))
 
 # Creating evidence gap map 1 (egm1)
-egm1 <- ggplot(complete_matrix1,
-               aes(x = outcomes_specific_reordered, y = intervention_class, 
-                   fill = n)) +
+ggplot(complete_matrix1,
+       aes(x = outcomes_specific_reordered, y = intervention_class,  fill = n)) +
   geom_tile(color = "grey") + 
   scale_fill_gradient(low = "white", high = "steelblue", name = "Total studies") +
   geom_point(data = df_count1, aes(size = n, color = studydesign_reordered), 
@@ -100,9 +99,7 @@ egm1 <- ggplot(complete_matrix1,
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),  
         panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank())  
-
-egm1
+        panel.grid.minor = element_blank()) 
 ```
 Caption: Notes on study design: 
        between = comparative (between-subject comparison)
