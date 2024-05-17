@@ -69,7 +69,7 @@ fulldata$outcomes_specific_reordered <- factor(fulldata$outcomes_specific, level
 
 ## Class of interventions vs outcomes (subclass)
 
-```{r fig.height=5, fig.width=9}
+```{r fig.height=6, fig.width=8}
 # Grouping data
 df_count1 <- fulldata %>%
   count(outcomes_specific_reordered, intervention_class, studydesign_reordered) %>%
@@ -92,7 +92,7 @@ ggplot(complete_matrix1,
                                                           dodge.width = 0.5)) +
   scale_y_discrete(limits = rev) +
   scale_size_continuous(range = c(3, 12),
-                        breaks = c(1,5,10,15,20), 
+                        breaks = c(1, 5, 10, 20), 
                         labels = function(x) round(x, 0)) + 
   scale_colour_discrete_qualitative() +
   labs(x = "Outcomes",
@@ -103,8 +103,9 @@ ggplot(complete_matrix1,
   theme(axis.text.x = element_text(angle = 45, hjust = 1),  
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
-        legend.location = "plot") +
-  guides(size = guide_legend(nrow = 3, 
+        legend.location = "plot",
+        legend.position = "bottom") +
+  guides(size = guide_legend(nrow = 2,
                              title = "Number of studies\nper study design"),
          colour = guide_legend(nrow = 3, override.aes = list(size = 5)))
 ```
