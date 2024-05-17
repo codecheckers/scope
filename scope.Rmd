@@ -68,7 +68,7 @@ fulldata$outcomes_specific_reordered <- factor(fulldata$outcomes_specific, level
 
 ## Class of interventions vs outcomes (subclass)
 
-```{r fig.height=8, fig.width=12}
+```{r fig.height=5, fig.width=9}
 # Grouping data
 df_count1 <- fulldata %>%
   count(outcomes_specific_reordered, intervention_class, studydesign_reordered) %>%
@@ -82,7 +82,8 @@ complete_matrix1 <- expand_grid(outcomes_specific_reordered = unique(fulldata$ou
 
 # Creating evidence gap map 1 (egm1)
 ggplot(complete_matrix1,
-       aes(x = outcomes_specific_reordered, y = intervention_class,  fill = n)) +
+       aes(x = outcomes_specific_reordered, y = str_wrap(intervention_class, 25),
+           fill = n)) +
   geom_tile(color = "grey") + 
   scale_fill_gradient(low = "white", high = "steelblue", name = "Total studies") +
   geom_point(data = df_count1, aes(size = n, color = studydesign_reordered), 
@@ -99,7 +100,11 @@ ggplot(complete_matrix1,
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),  
         panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank()) 
+        panel.grid.minor = element_blank(),
+        legend.location = "plot") +
+  guides(size = guide_legend(nrow = 3, 
+                             title = "Number of studies\nper study design"),
+         colour = guide_legend(nrow = 3))
 ```
 Caption: Notes on study design: 
        between = comparative (between-subject comparison)
