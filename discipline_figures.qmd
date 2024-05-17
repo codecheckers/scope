@@ -1,10 +1,10 @@
 ---
 title: "Discipline figures"
-format: pdf
+format: html
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, dpi = 600)
 ```
 
 ```{r}
@@ -113,7 +113,7 @@ p2 <- frasc_2nd_long %>%
 ```
 
 # Joint figure
-```{r, fig.width=8, fig.height=6.5}
+```{r discipline-fig, fig.width=8, fig.height=6.5}
 areas <- c(
   area(2, 1, 10, 8),
   area(1, 9, 11, 20),
@@ -125,10 +125,3 @@ p1 + p2 + free(p3) + plot_annotation(tag_levels = "A") +
   theme(legend.position = "none")
 ```
 
-
-Answers:
-
-- we can align labels for panels A and B, but then either get a figure that is 
-too tall, or a gap.
-- Adding a legend with more colours is possible, but would add quite a bit of 
-further text that essentially duplicates what is already in the figure
