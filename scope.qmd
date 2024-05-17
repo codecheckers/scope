@@ -1,12 +1,12 @@
 ---
 title: "Scoping Review Report"
 date: "`r Sys.Date()`"
-output: pdf_document
+format: html
 ---
 
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, dpi = 600)
 ```
 
 
@@ -69,7 +69,7 @@ fulldata$outcomes_specific_reordered <- factor(fulldata$outcomes_specific, level
 
 ## Class of interventions vs outcomes (subclass)
 
-```{r fig.height=6, fig.width=8}
+```{r emg1, fig.height=6, fig.width=8}
 # Grouping data
 df_count1 <- fulldata %>%
   count(outcomes_specific_reordered, intervention_class, studydesign_reordered) %>%
@@ -119,7 +119,7 @@ Caption: Notes on study design:
 
 ## Class of interventions vs outcomes (class with direct/proxy outcomes)
 
-```{r fig.height=7, fig.width=12}
+```{r egm2, fig.height=7, fig.width=12}
 # Grouping data
 df_count2 <- aggregate(author_year ~ intervention_class + outcomes_class_reordered + studydesign_reordered + direct, data = fulldata, FUN = length)
 
