@@ -97,12 +97,7 @@ egm1 <- ggplot(complete_matrix1,
        x = "Outcomes",
        y = "Class of interventions",
        size = "Number of studies per study design",
-       color = "Study design",
-       caption = "Notes on study design: 
-       between = comparative (between-subject comparison)
-       within = comparative (within-subject comparison/repeated measures design)
-       post only = posttest design (only a post measurement after the implementation of an intervention and the intervention is explicitly mentioned)
-       other = other designs") +
+       color = "Study design") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),  
         panel.border = element_rect(color = "black", fill = NA, linewidth = 1),  
@@ -111,7 +106,11 @@ egm1 <- ggplot(complete_matrix1,
 
 egm1
 ```
-
+Caption: Notes on study design: 
+       between = comparative (between-subject comparison)
+       within = comparative (within-subject comparison/repeated measures design)
+       post only = posttest design (only a post measurement after the implementation of an intervention and the intervention is explicitly mentioned)
+       other = other designs
 
 # Graph 2: Evidence Gap Map 2
 
