@@ -28,15 +28,6 @@ relevant_data <- df %>%
 stopifnot(identical(nrow(relevant_data), 104L))
 ```
 
-
-# Remaining data issues
-
-- 91551167: top and 2nd level disagree
-- 88008617: "Sciences" should be "sciences"
-- 91550549: typo: "asic medicine"
-- 88008615: top level is missing
-
-
 # Fix the issues (except first order codings)
 
 ```{r}
@@ -63,7 +54,7 @@ p3 <- frasc_top_long %>%
   scale_fill_discrete_qualitative() +
   scale_y_continuous(breaks = seq(0, 20, by = 4)) +
   theme(legend.position = "top") +
-  labs(x = NULL, y = "# of studies", fill = NULL)
+  labs(x = NULL, y = "Number of studies", fill = NULL)
 ```
 
 # Panel 1 - Frascati distribution overall
@@ -85,17 +76,20 @@ p1 <- pdata %>%
   ggplot(aes(fct_rev(full_data), n, fill = frasc_top_split)) +
   geom_col(show.legend = FALSE, width = .75) +
   scale_fill_discrete_qualitative() +
-  labs(x = NULL, y = "# of studies", fill = NULL) +
+  labs(x = NULL, y = "Number of studies", fill = NULL) +
   coord_flip()
 ```
 
 # Panel 2 - Second order frascati
 ```{r}
 frasc_2nd_long <- relevant_fixed %>% 
-  # we split by semicolon, but there is an error in the last row
   mutate(frasc_2nd_split = str_split(frasc_2nd, ";\\s")) %>% 
   unnest(frasc_2nd_split) %>% 
-  mutate(frasc_top_split = 
+  mutate(frasc_2nd_split =  case_match(
+    frasc_2nd_split,
+    "Earth and related environmental sciences" ~ "Earth/env. sciences",
+    .default = frasc_2nd_split),
+         frasc_top_split = 
            case_when(
              !str_detect(frasc_top, ";") ~ frasc_top,
              frasc_2nd_split == "Clinical medicine" ~ "Medical and health sciences",
@@ -114,7 +108,7 @@ p2 <- frasc_2nd_long %>%
   ggplot(aes(fct_reorder(str_wrap(frasc_2nd_split, 30), n, .fun = max), n, fill = frasc_top_split)) +
   geom_col(show.legend = FALSE, width = .75) +
   scale_fill_discrete_qualitative() +
-  labs(x = NULL, y = "# of studies", fill = NULL) +
+  labs(x = NULL, y = "Number of studies", fill = NULL) +
   coord_flip()
 ```
 
@@ -132,12 +126,12 @@ p1 + p2 + free(p3) + plot_annotation(tag_levels = "A") +
 ```
 
 
-88009363: just to check: should this be two studies?
+88009363: just to check: is this really two studies (counting twice in the 
+PRISMA chart)?
 
+Answers:
 
-Answers to questions from Tony:
-
-- spike in 2011 is not caused by full counting
-- x labels: this is the number of studies looking into these disciplines. hope
-this is clear enough from "# of studies"
-
+- we can align labels for panels A and B, but then either get a figure that is 
+too tall, or a gap.
+- Adding a legend with more colours is possible, but would add quite a bit of 
+further text that essentially duplicates what is already in the figure
