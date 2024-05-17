@@ -93,8 +93,7 @@ egm1 <- ggplot(complete_matrix1,
   scale_size_continuous(range = c(3, 12),
                         breaks = c(1,5,10,15,20), 
                         labels = function(x) round(x, 0)) + 
-  labs(title = "",
-       x = "Outcomes",
+  labs(x = "Outcomes",
        y = "Class of interventions",
        size = "Number of studies per study design",
        color = "Study design") +
