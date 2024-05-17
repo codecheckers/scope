@@ -29,23 +29,19 @@ stopifnot(identical(nrow(relevant_data), 104L))
 ```
 
 
-# Data issues
+# Remaining data issues
 
-- The frascati top level is not delimineted with a semicolon in the last row, 
-but with an "and".
-- Same for article id 91550908, which uses a colon (,)
-- Same issue with second level for article id 88008647
-- Some second level frascati are misspelled
-- Some first order codings are missing
+- 91551167: top and 2nd level disagree
+- 88008617: "Sciences" should be "sciences"
+- 91550549: typo: "asic medicine"
+- 88008615: top level is missing
 
 
 # Fix the issues (except first order codings)
 
 ```{r}
 relevant_fixed <- relevant_data %>% 
-  mutate(frasc_top = str_replace_all(frasc_top, ",", ";") %>% 
-           str_replace_all("(?<=Natural sciences) and (?=Medical)", "; "),
-         frasc_2nd = str_replace_all(frasc_2nd, "Sciences", "sciences") %>% 
+  mutate(frasc_2nd = str_replace_all(frasc_2nd, "Sciences", "sciences") %>% 
            str_replace_all(",", ";"))
 ```
 
@@ -53,7 +49,6 @@ relevant_fixed <- relevant_data %>%
 # Split top level
 ```{r}
 frasc_top_long <- relevant_fixed %>% 
-  # we split by semicolon, but there is an error in the last row
   mutate(frasc_top_split = str_split(frasc_top, ";\\s")) %>% 
   unnest(frasc_top_split)
 ```
@@ -66,23 +61,32 @@ p3 <- frasc_top_long %>%
   ggplot(aes(publication_year, n, fill = frasc_top_split)) +
   geom_col(width = .75) +
   scale_fill_discrete_qualitative() +
+  scale_y_continuous(breaks = seq(0, 20, by = 4)) +
   theme(legend.position = "top") +
-  labs(x = NULL, y = "# of studied disciplines", fill = NULL)
-p3
+  labs(x = NULL, y = "# of studies", fill = NULL)
 ```
-Need a disclaimer here about 2023: there was probably a cut-off in the data, not
-a decrease in studies (in particular since social sciences is much smaller, 
-which might be due to longer publication times?).
 
 # Panel 1 - Frascati distribution overall
 ```{r, fig.width=5, fig.height=3}
-p1 <- frasc_top_long %>% 
-  ggplot(aes(fct_rev(frasc_top_split), fill = frasc_top_split)) +
-  geom_bar(show.legend = FALSE, width = .75) +
+pdata <- frasc_top_long %>% 
+  count(frasc_top_split) %>% 
+  # add missing disciplines
+  bind_rows(
+    tribble(
+      ~full_data, ~n,
+      "Engineering and technology", 0,
+      "Agricultural and veterinary sciences", 0,
+      "Humanities and the arts", 0
+    )
+  ) %>% 
+  mutate(full_data = coalesce(frasc_top_split, full_data))
+
+p1 <- pdata %>% 
+  ggplot(aes(fct_rev(full_data), n, fill = frasc_top_split)) +
+  geom_col(show.legend = FALSE, width = .75) +
   scale_fill_discrete_qualitative() +
-  labs(x = NULL, y = "# of studied disciplines", fill = NULL) +
+  labs(x = NULL, y = "# of studies", fill = NULL) +
   coord_flip()
-p1
 ```
 
 # Panel 2 - Second order frascati
@@ -107,23 +111,33 @@ frasc_2nd_long <- relevant_fixed %>%
 ```{r, fig.width=7, fig.height=5}
 p2 <- frasc_2nd_long %>% 
   count(frasc_2nd_split, frasc_top_split) %>% 
-  ggplot(aes(fct_reorder(frasc_2nd_split, n, .fun = max), n, fill = frasc_top_split)) +
+  ggplot(aes(fct_reorder(str_wrap(frasc_2nd_split, 30), n, .fun = max), n, fill = frasc_top_split)) +
   geom_col(show.legend = FALSE, width = .75) +
   scale_fill_discrete_qualitative() +
-  labs(x = NULL, y = "# of studied disciplines", fill = NULL) +
+  labs(x = NULL, y = "# of studies", fill = NULL) +
   coord_flip()
-p2
 ```
 
 # Joint figure
-```{r, fig.width=10, fig.height=7}
-(p1 + p2) / p3 + plot_annotation(tag_levels = "A") +
-  plot_layout(guides = "collect") & 
+```{r, fig.width=8, fig.height=6.5}
+areas <- c(
+  area(2, 1, 10, 8),
+  area(1, 9, 11, 20),
+  area(12, 1, 20, 20)
+)
+
+p1 + p2 + free(p3) + plot_annotation(tag_levels = "A") +
+  plot_layout(guides = "collect", design = areas) & 
   theme(legend.position = "none")
 ```
 
-There are still issues in the raw data - some frascati top levels were omitted,
-which is why the colouring in panel B is off (for example, article id 88009136
-has only medical and health sciences as top level, but has biological sciences 
-and basic medicine at the sublevel --> natural sciences is missing at the 
-toplevel)
+
+88009363: just to check: should this be two studies?
+
+
+Answers to questions from Tony:
+
+- spike in 2011 is not caused by full counting
+- x labels: this is the number of studies looking into these disciplines. hope
+this is clear enough from "# of studies"
+
