@@ -91,7 +91,7 @@ ggplot(complete_matrix1,
              alpha = 0.6, position = position_jitterdodge(jitter.width = 0.2, 
                                                           dodge.width = 0.5)) +
   scale_y_discrete(limits = rev) +
-  scale_size_continuous(range = c(3, 12),
+  scale_size_continuous(range = c(3, 10),
                         breaks = c(1, 5, 10, 20), 
                         labels = function(x) round(x, 0)) + 
   scale_colour_discrete_qualitative() +
