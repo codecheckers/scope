@@ -81,12 +81,18 @@ complete_matrix1 <- expand_grid(outcomes_specific_reordered = unique(fulldata$ou
   replace_na(list(n = 0))
 
 # Creating evidence gap map 1 (egm1)
-egm1 <- ggplot(complete_matrix1, aes(x =outcomes_specific_reordered, y = intervention_class, fill = n)) +
+egm1 <- ggplot(complete_matrix1,
+               aes(x = outcomes_specific_reordered, y = intervention_class, 
+                   fill = n)) +
   geom_tile(color = "grey") + 
   scale_fill_gradient(low = "white", high = "steelblue", name = "Total studies") +
-  geom_point(data = df_count1, aes(size = n, color = studydesign_reordered), position = position_jitterdodge(jitter.width = 0.2, dodge.width = 0.5), alpha = 0.6) +
-  scale_y_discrete(limits=rev)+
-  scale_size_continuous(range = c(3, 12), breaks = c(1,5,10,15,20), labels = function(x) round(x,0)) + 
+  geom_point(data = df_count1, aes(size = n, color = studydesign_reordered), 
+             alpha = 0.6, position = position_jitterdodge(jitter.width = 0.2, 
+                                                          dodge.width = 0.5)) +
+  scale_y_discrete(limits = rev) +
+  scale_size_continuous(range = c(3, 12),
+                        breaks = c(1,5,10,15,20), 
+                        labels = function(x) round(x, 0)) + 
   labs(title = "",
        x = "Outcomes",
        y = "Class of interventions",
