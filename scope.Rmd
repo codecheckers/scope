@@ -106,7 +106,7 @@ ggplot(complete_matrix1,
         legend.location = "plot") +
   guides(size = guide_legend(nrow = 3, 
                              title = "Number of studies\nper study design"),
-         colour = guide_legend(nrow = 3))
+         colour = guide_legend(nrow = 3, override.aes = list(size = 5)))
 ```
 Caption: Notes on study design: 
        between = comparative (between-subject comparison)
