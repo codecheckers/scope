@@ -1,12 +1,12 @@
 ---
 title: "Scoping Review Report"
 date: "`r Sys.Date()`"
-output: pdf_document
+format: html
 ---
 
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, dpi = 600)
 ```
 
 
@@ -21,7 +21,8 @@ pacman::p_load(
   flextable,
   ggplot2,
   dplyr,
-  tidyr
+  tidyr,
+  colorspace
 )
 
 # Load data
@@ -68,7 +69,7 @@ fulldata$outcomes_specific_reordered <- factor(fulldata$outcomes_specific, level
 
 ## Class of interventions vs outcomes (subclass)
 
-```{r fig.height=8, fig.width=12}
+```{r emg1, fig.height=6, fig.width=8}
 # Grouping data
 df_count1 <- fulldata %>%
   count(outcomes_specific_reordered, intervention_class, studydesign_reordered) %>%
@@ -81,43 +82,44 @@ complete_matrix1 <- expand_grid(outcomes_specific_reordered = unique(fulldata$ou
   replace_na(list(n = 0))
 
 # Creating evidence gap map 1 (egm1)
-egm1 <- ggplot(complete_matrix1,
-               aes(x = outcomes_specific_reordered, y = intervention_class, 
-                   fill = n)) +
+ggplot(complete_matrix1,
+       aes(x = outcomes_specific_reordered, y = str_wrap(intervention_class, 25),
+           fill = n)) +
   geom_tile(color = "grey") + 
   scale_fill_gradient(low = "white", high = "steelblue", name = "Total studies") +
   geom_point(data = df_count1, aes(size = n, color = studydesign_reordered), 
              alpha = 0.6, position = position_jitterdodge(jitter.width = 0.2, 
                                                           dodge.width = 0.5)) +
   scale_y_discrete(limits = rev) +
-  scale_size_continuous(range = c(3, 12),
-                        breaks = c(1,5,10,15,20), 
+  scale_size_continuous(range = c(3, 10),
+                        breaks = c(1, 5, 10, 20), 
                         labels = function(x) round(x, 0)) + 
-  labs(title = "",
-       x = "Outcomes",
+  scale_colour_discrete_qualitative() +
+  labs(x = "Outcomes",
        y = "Class of interventions",
        size = "Number of studies per study design",
-       color = "Study design",
-       caption = "Notes on study design: 
+       color = "Study design") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        legend.location = "plot",
+        legend.position = "bottom") +
+  guides(size = guide_legend(nrow = 2,
+                             title = "Number of studies\nper study design"),
+         colour = guide_legend(nrow = 3, override.aes = list(size = 5)))
+```
+Caption: Notes on study design: 
        between = comparative (between-subject comparison)
        within = comparative (within-subject comparison/repeated measures design)
        post only = posttest design (only a post measurement after the implementation of an intervention and the intervention is explicitly mentioned)
-       other = other designs") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
-        panel.border = element_rect(color = "black", fill = NA, linewidth = 1),  
-        panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank())  
-
-egm1
-```
-
+       other = other designs
 
 # Graph 2: Evidence Gap Map 2
 
 ## Class of interventions vs outcomes (class with direct/proxy outcomes)
 
-```{r fig.height=7, fig.width=12}
+```{r egm2, fig.height=7, fig.width=12}
 # Grouping data
 df_count2 <- aggregate(author_year ~ intervention_class + outcomes_class_reordered + studydesign_reordered + direct, data = fulldata, FUN = length)
 
