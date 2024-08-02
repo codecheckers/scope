@@ -3,42 +3,38 @@ version: https://codecheck.org.uk/spec/config/1.0
 
 paper:
   title: >
-    The principal components of natural images
+    Open Science interventions to improve reproducibility and replicability of research: a scoping review preprint
   authors:
-    - name: Peter J. B. Hancock
-    - name: Roland J. Baddeley
-    - name: Leslie S. Smith
-      ORCID: 0000-0002-3716-8013
+    - name: Leonie Dudda
+    - name: Eva Kormann
+    - name: Magdalena Kozula
+    - name: Nicholas J. DeVito
+    - name: Thomas Klebe
+    - name: Ayu P.M. Dewi
+    - name: René Spijker
+    - name: Inge Stegeman
+    - name: Veerle Van den Eynden
+    - name: Tony Ross-Hellauer
+    - name: Mariska M.G. Leeflang
+
   reference: >
-    Network (1992) 3:61-70
-    http://pdfs.semanticscholar.org/7dcf/a42cfe3b59becb441844b72558b361693608.pdf
+    Dudda, L., Kormann, E., Kozula, M., DeVito, N. J., Klebel, T., Dewi, A. P. M., … Leeflang, M. (2024, June 17). Open Science interventions to improve reproducibility and replicability of research: a scoping review preprint. https://doi.org/10.31222/osf.io/a8rmu
 
 manifest:
-  - file: Figure2.png
+  - file: egm1.jpg
     comment: manuscript Figure 2
-  - file: Figure3.png
+  - file: egm2.jpg
     comment: manuscript Figure 3
-  - file: Figure4.png
+  - file: egm3.jpg
     comment: manuscript Figure 4
-  - file: Figure5.png
-    comment: manuscript Figure 5
-  - file: Figure6.png
-    comment: manuscript Figure 6
-  - file: Figure7.png
-    comment: manuscript Figure 7
-  - file: Figure8.png
-    comment: manuscript Figure 8
 
 codechecker:
-  - name: Stephen J. Eglen
-    ORCID: 0000-0001-8607-8025
-  - name: Daniel Nüst
-    ORCID: 0000-0002-0024-5046
+  - name: Sam Langton
+    ORCID: 0000-0002-1322-1553
 
 summary: >
-  Matlab code written by Iain Davies to reproduce original
-  paper; natural images provided by Peter Hancock.
-repository: https://github.com/codecheckers/Reproduction-Hancock
-check_time: "2020-04-13 10:00:00"
-certificate: 2020-XYZ
-report: https://doi.org/10.5281/zenodo.FIXME
+  Codecheck performed on R code in a public GitHub repository containing results from a scoping review pre-print.
+repository: Not yet published online.
+check_time: "2024-08-01 10:00:00"
+certificate: None yet.
+report: None yet.
