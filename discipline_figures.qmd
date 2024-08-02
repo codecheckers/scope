@@ -14,7 +14,7 @@ library(patchwork)
 
 theme_set(theme_minimal())
 
-df <- readxl::read_excel("Full_data_2024_04_02.xlsx")
+df <- readxl::read_excel("fulldata.xlsx")
 
 relevant_data <- df %>% 
   # read_excel imports an empty row for some reason
