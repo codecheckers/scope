@@ -25,6 +25,12 @@ root = find_root("codecheck.yml")
 latex_codecheck_logo()
 ```
 
+```{r amc, fig.align = 'center', out.width='40%', echo=FALSE}
+knitr::include_graphics("../img/Amsterdam_UMC_logo_with_text.png", )
+```
+
+\vspace{2em}
+
 ```{r manifest, eval=TRUE, include=FALSE}
 metadata = codecheck_metadata(root)
 manifest = metadata$manifest
@@ -56,7 +62,7 @@ latex_summary_of_manifest(metadata, manifest_df, root)
 
 # Summary
 
-This code was straightforward to codecheck. There were two `.qmd` files containing R code to execute. One rendered with no issues whatsoever, and the other rendered successfully after I updated the data file name to that in the repository. Four figures were successfully reproduced. The only issue was that the figures are not saved from within the script, so their appearance (e.g., DPI, dimensions, aspect ratio) is different to that in the paper, but the visuals themselves show the same result.
+This code was straightforward to codecheck. There were two `.qmd` files containing R code to execute. One rendered with no issues whatsoever, and the other rendered successfully after I updated the data file name. Four figures were successfully reproduced. The figures were not saved from within the script, so their appearance (e.g., DPI, dimensions, aspect ratio) differed to that in the paper, but the visuals themselves show the same result. The tables in the paper were presumably generated manually or in other scripts.
 
 <!-- \clearpage -->
 
@@ -71,10 +77,10 @@ if(git2r::in_repository(root)) {
 
 - Codecheck performed on the repository as of commit `e202c81f46bc9cd1fbe9df38d610a6dec25f65d6`.
 - Repository was forked to https://github.com/langtonhugh/scope.
-- There were two `.qmd` files containing R code, so this is what the checked was conducted on.
+- There were two `.qmd` files containing R code, so this is what the check was conducted on.
 - I began with `scope.qmd`. When prompted by RStudio, I installed the necessary packages (for me, this was only `pacman`).
-- This rendered with no errors. The graphics outputted in the resulting `.html` were Figures 2, 3 and 4 in the paper. The visuals differed only in their aspect ratio, because the output is printed out rather than saved with specified dimensions and DPI. Other than that, all three figures visually matched those the paper.
-- Rendering `discipline_figures.qmd` failed first time because the data specified at the beginning of the script did not exist. After changing the file name to the (only) worksheet on the repository `fulldata.xlsx` the document was built with no errors. The visual matches that of Figure 5 in the paper.
+- This rendered with no errors. The graphics outputted in the resulting `.html` were Figures 2, 3 and 4 in the paper. The visuals differed only in their aspect ratio/dimensions, because the output is displayed within the output html rather than saved with specified dimensions and DPI. Other than that, all three figures visually matched those the paper.
+- Rendering `discipline_figures.qmd` failed first time because the data specified at the beginning of the script did not exist. After changing the file name to the (only) worksheet on the repository `fulldata.xlsx` the document was built with no errors and the visual matched that of Figure 5 in the paper.
 
 ## Recommendations
 
@@ -83,7 +89,7 @@ I suggest to the authors to consider the following suggestions for their next pu
 - Save figures from within the script using something like `ggsave()` so that the outputs are reproduced as reported (e.g., dimensions, DPI) rather than embedded within the outputted `.html`.
 - Although it did not produce any issues for me, I would recommend saving the session info or using the `renv` package to snapshot the software environment (R version, packages, package versions). 
 - The `README` doc could have a little more detail, such as instructing users which syntax to run, and linking the graphics to the corresponding figure numbers in the paper.
-- I made a pull request for the data file name issue, since this is a clear improvement.
+- I made a pull request for the data file name issue.
 
 \clearpage
 

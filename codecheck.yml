@@ -22,9 +22,9 @@ paper:
 
 manifest:
   - file: scope.html
-    comment: manuscript Figures 234
+    comment: doc containing figures 2 3 4
   - file: discipline_figures.html
-    comment: manuscript Figure 5
+    comment: doc containing figure 5
 
 
 codechecker:
@@ -32,8 +32,8 @@ codechecker:
     ORCID: 0000-0002-1322-1553
 
 summary: >
-  Codecheck performed on R code embedded in two .qmd files from a public GitHub repository containing material for a scoping review pre-print.
-repository: Not yet published online.
+  Codecheck performed on two .qmd files containing R code from a public GitHub repository for a scoping review pre-print.
+repository: https://github.com/langtonhugh/scope
 check_time: "2024-08-01 10:00:00"
 certificate: 
 report: 
