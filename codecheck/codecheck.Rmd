@@ -89,7 +89,7 @@ I suggest to the authors to consider the following suggestions for their next pu
 - Save figures from within the script using something like `ggsave()` so that the outputs are reproduced as reported (e.g., dimensions, DPI) rather than embedded within the outputted `.html`.
 - Although it did not produce any issues for me, I would recommend saving the session info or using the `renv` package to snapshot the software environment (R version, packages, package versions). 
 - The `README` doc could have a little more detail, such as instructing users which syntax to run, and linking the graphics to the corresponding figure numbers in the paper.
-- I made a pull request for the data file name issue.
+- I made a pull request for the data file name issue and this has been merged into the main repository (https://github.com/ayudewi/scope/pull/4).
 
 \clearpage
 
