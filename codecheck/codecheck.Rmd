@@ -90,6 +90,7 @@ I suggest to the authors to consider the following suggestions for their next pu
 - Although it did not produce any issues for me, I would recommend saving the session info or using the `renv` package to snapshot the software environment (R version, packages, package versions). 
 - The `README` doc could have a little more detail, such as instructing users which syntax to run, and linking the graphics to the corresponding figure numbers in the paper.
 - I made a pull request for the data file name issue and this has been merged into the main repository (https://github.com/ayudewi/scope/pull/4).
+- The repository currently has no licence, so as it stands it is not open source. If the authors would like it to be, they should add an appropriate licence.
 
 \clearpage
 
@@ -125,11 +126,12 @@ for(i in c(1:nrow(manifest_df))) {
 }
 ```
 
+
 \clearpage
 
 ## Acknowledgements
 
-CODECHECK is financially supported by the Mozilla foundation.
+CODECHECK is financially supported by the Mozilla foundation. Thanks to Daniel Nüst for providing feedback on the first draft of this report.
 
 # Citing this document
 
@@ -153,8 +155,14 @@ code and data.
 This document was created using [R Markdown](https://rmarkdown.rstudio.com/) using the [`codecheck`](https://github.com/codecheckers/codecheck) R package.
 `make codecheck.pdf` will regenerate the report file.
 
+# Session info
+
+Generated and saved after executing `scope.qmd` and `discipline_figures.qmd`.
+
 ```{r}
-sessionInfo()
+session <- readLines("../sessionInfo.txt")
+
+cat(session, sep = "\n")
 ```
 
 ```{r, include=FALSE, eval=FALSE}

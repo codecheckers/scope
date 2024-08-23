@@ -21,10 +21,20 @@ paper:
     Dudda, L., Kormann, E., Kozula, M., DeVito, N. J., Klebel, T., Dewi, A. P. M., … Leeflang, M. (2024, June 17). Open Science interventions to improve reproducibility and replicability of research: a scoping review preprint. https://doi.org/10.31222/osf.io/a8rmu
 
 manifest:
-  - file: scope.html
+  - file: codecheck/outputs/scope.html
     comment: doc containing figures 2 3 4
-  - file: discipline_figures.html
+  - file: codecheck/outputs/discipline_figures.html
     comment: doc containing figure 5
+  - file: codecheck/outputs/scope1.png
+    comment: screenshot of fig 2
+  - file: codecheck/outputs/scope2.png
+    comment: screenshot of fig 3
+  - file: codecheck/outputs/scope3.png
+    comment: screenshot of fig 4
+  - file: codecheck/outputs/discipline_figures.png
+    comment: screenshot of fig 5
+  
+  
 
 
 codechecker:
@@ -36,4 +46,4 @@ summary: >
 repository: https://github.com/langtonhugh/scope
 check_time: "2024-08-01 10:00:00"
 certificate: 2024-004
-report: 
+report: 10.5281/zenodo.13364677
