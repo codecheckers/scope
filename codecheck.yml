@@ -17,8 +17,7 @@ paper:
     - name: Tony Ross-Hellauer
     - name: Mariska M.G. Leeflang
 
-  reference: >
-    Dudda, L., Kormann, E., Kozula, M., DeVito, N. J., Klebel, T., Dewi, A. P. M., … Leeflang, M. (2024, June 17). Open Science interventions to improve reproducibility and replicability of research: a scoping review preprint. https://doi.org/10.31222/osf.io/a8rmu
+  reference: https://doi.org/10.31222/osf.io/a8rmu
 
 manifest:
   - file: codecheck/outputs/scope.html
@@ -46,4 +45,4 @@ summary: >
 repository: https://github.com/langtonhugh/scope
 check_time: "2024-08-01 10:00:00"
 certificate: 2024-004
-report: 10.5281/zenodo.13364677
+report: https://doi.org/10.5281/zenodo.13364677
