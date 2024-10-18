@@ -8,6 +8,6 @@
   2. Open `scoping.Rproj` within RStudio.
   3. The project uses [renv](https://rstudio.github.io/renv/articles/renv.html) to manage R package versions. If needed, install it using `install.packages("renv")` in the R Console.
   4. When prompted, execute `renv::restore()` in the R Console. This will read the `renv.lock` metadata and install the package versions needed to reproduce the figures.
-  4. Render `scope.qmd` and `discipline_figures.qmd` within RStudio. Each will build an `.html` file and save the figures to the `visuals` folder.
+  5. Render `scope.qmd` and `discipline_figures.qmd` within RStudio. Each will build an `.html` file and save the figures to the `visuals` folder.
 
 
