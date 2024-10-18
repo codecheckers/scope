@@ -1,6 +1,6 @@
 ## Scoping review and evidence gap mapping of open science to improve reproducibility
 
-- The original publication can be found on [OSF](https://osf.io/preprints/metaarxiv/a8rmu). .
+- The original publication can be found on [OSF](https://osf.io/preprints/metaarxiv/a8rmu). 
 - The [CODECHECK](https://codecheck.org.uk/) report can be found on [Zenodo](https://zenodo.org/records/13364677).
 - This repository contains the data and code required to reproduce Figures 2, 3, 4 and 5.
 - Steps for reproduction:
