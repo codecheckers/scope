@@ -121,7 +121,7 @@ ggplot(tile_1, aes(x = outcomes_specific_reordered, y = intervention_class_reord
                              title = "Number of studies\nper study design"),
          colour = guide_legend(nrow = 3, override.aes = list(size = 5)))
 
-ggsave(filename = "visuals/egm1.jpg", height = 28, width = 40, unit = "cm")
+ggsave(filename = "visuals/figure2.jpg", height = 28, width = 40, unit = "cm")
 
 ```
 Caption: Notes on study design: 
@@ -181,7 +181,7 @@ ggplot(tile_2, aes(x = outcomes_class_reordered, y = intervention_class_reordere
                              title = "Number of studies\nper study design"),
          fill = guide_colorbar(order=3))
 
-ggsave(filename = "visuals/egm2.jpg", height = 30, width = 40, unit = "cm")
+ggsave(filename = "visuals/figure3.jpg", height = 30, width = 40, unit = "cm")
 
 ```
 Caption: The left pane shows direct reproducibility outcomes, while the right pane shows proxy outcomes. Study designs: between = comparative (between-subject comparison) within = comparative (within-subject comparison/repeated measures design) post only = post-intervention (only a post measurement after the implementation of an intervention and the intervention is explicitly mentioned) other = other designs
@@ -236,6 +236,6 @@ ggplot(tile_3, aes(x = outcomes_specific_reordered, y = intervention_specific_re
          fill = guide_colorbar(order=3))
 
 
-ggsave(filename = "visuals/egm3.jpg", height = 30, width = 40, unit = "cm")
+ggsave(filename = "visuals/figure4.jpg", height = 30, width = 40, unit = "cm")
 
 ```
